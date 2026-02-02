@@ -48,11 +48,15 @@ $(cat /workspace/${TASK_FILE:-task.md})"
 # Write prompt to file (avoids command line issues with multi-line strings)
 echo "${PROMPT}" > /tmp/prompt.txt
 
+# Create session directory for Pi's native logging
+SESSION_DIR="/workspace/.popebot/sessions"
+mkdir -p "${SESSION_DIR}"
+
 # Create runner script for tmux (avoids quoting issues)
 cat > /tmp/run-pi.sh << 'RUNNER'
 #!/bin/bash
 cd /workspace
-pi "$(cat /tmp/prompt.txt)"
+pi --session-dir /workspace/.popebot/sessions "$(cat /tmp/prompt.txt)"
 echo ""
 echo "=== Pi finished. Container will exit. ==="
 RUNNER

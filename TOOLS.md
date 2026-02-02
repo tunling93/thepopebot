@@ -23,6 +23,14 @@ A Chrome browser is running in a separate container and accessible for automatio
 - **CDP Port**: `9222` (Chrome DevTools Protocol)
 - **VNC Desktop**: `https://localhost:6901` (password: `popebot`) - for manual viewing/debugging
 
+**Important**: Chrome's DevTools Protocol rejects connections with hostname-based Host headers. You must connect using the IP address, not the hostname.
+
+```bash
+# Get browser IP address
+BROWSER_IP=$(getent hosts browser | awk '{print $1}')
+# Then use: http://${BROWSER_IP}:9222
+```
+
 ### Capabilities
 
 - Navigate to URLs
@@ -36,9 +44,13 @@ A Chrome browser is running in a separate container and accessible for automatio
 
 ```javascript
 const puppeteer = require('puppeteer');
+const { execSync } = require('child_process');
+
+// Get browser IP (Chrome CDP requires IP, not hostname)
+const browserIP = execSync('getent hosts browser | awk \'{print $1}\'').toString().trim();
 
 const browser = await puppeteer.connect({
-  browserURL: 'http://browser:9222'
+  browserURL: `http://${browserIP}:9222`
 });
 
 const page = await browser.newPage();
