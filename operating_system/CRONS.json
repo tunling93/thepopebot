@@ -2,9 +2,9 @@
   {
     "name": "heartbeat",
     "schedule": "*/30 * * * *",
-    "type": "agent",
-    "job": "Read the file at operating_system/HEARTBEAT.md and complete the tasks described there.",
-    "enabled": false
+    "type": "command",
+    "command": "bash event_handler/cron/heartbeat-ollama.sh",
+    "enabled": true
   },
   {
     "name": "daily-check",

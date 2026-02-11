@@ -125,3 +125,6 @@ The wizard handles everything:
 | [Auto-Merge](docs/AUTO_MERGE.md) | Auto-merge controls, ALLOWED_PATHS configuration |
 | [How to Use Pi](docs/HOW_TO_USE_PI.md) | Guide to the Pi coding agent |
 | [Security](docs/SECURITY_TODO.md) | Security hardening plan |
+| **[💰 Cost Optimization](docs/COST_OPTIMIZATION.md)** | **Save 80-95% on API costs using Ollama + Haiku** |
+| **[Migration Guide](MIGRATION_GUIDE.md)** | **Upgrade existing bots to cost-optimized version** |
+| [Model Selection Guide](docs/MODEL_SELECTION_GUIDE.md) | Quick reference for choosing the right model |

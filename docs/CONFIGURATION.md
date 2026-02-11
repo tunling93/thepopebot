@@ -17,7 +17,7 @@ All environment variables for the Event Handler (set in `event_handler/.env`):
 | `GH_WEBHOOK_SECRET` | Secret for GitHub Actions webhook auth | For notifications |
 | `ANTHROPIC_API_KEY` | Claude API key for chat functionality | For chat |
 | `OPENAI_API_KEY` | OpenAI key for voice transcription | For voice |
-| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-sonnet-4) | No |
+| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-haiku-4) | No |
 
 ---
 
@@ -43,7 +43,7 @@ Configure in **Settings → Secrets and variables → Actions → Variables**:
 | `AUTO_MERGE` | Set to `false` to disable auto-merge of job PRs | No | Enabled |
 | `ALLOWED_PATHS` | Comma-separated path prefixes for auto-merge | No | `/logs` |
 | `IMAGE_URL` | Docker image path (e.g., `ghcr.io/myorg/mybot`) | No | `stephengpope/thepopebot:latest` |
-| `MODEL` | Anthropic model ID for the Pi agent (e.g., `claude-sonnet-4-5-20250929`) | No | Pi default |
+| `MODEL` | Anthropic model ID for the Pi agent (e.g., `claude-haiku-4-20250514` for cost savings, `claude-sonnet-4-5-20250929` for complex tasks) | No | Pi default |
 
 ---
 

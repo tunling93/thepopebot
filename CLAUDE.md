@@ -308,7 +308,7 @@ Both `job` and `command` strings support the same templates:
 | `TELEGRAM_WEBHOOK_SECRET` | Secret for webhook validation | No |
 | `GH_WEBHOOK_SECRET` | Secret for GitHub Actions webhook auth | For notifications |
 | `ANTHROPIC_API_KEY` | Claude API key for chat functionality | For chat |
-| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-sonnet-4) | No |
+| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-haiku-4) | No |
 
 ## Docker Agent Layer
 
