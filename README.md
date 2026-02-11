@@ -8,6 +8,8 @@
 
 **Secure by default** — Other frameworks hand credentials to the LLM and hope for the best. thepopebot is different: the AI literally cannot access your secrets, even if it tries. Secrets are filtered at the process level before the agent's shell even starts.
 
+**Cost-optimized** — Run your agent for <$10/month instead of $30-50. Uses Haiku for routine tasks, free local Ollama for heartbeats, and reserves Sonnet only for complex work. See [Cost Optimization Guide](docs/COST_OPTIMIZATION.md) for details.
+
 **The repository IS the agent** — Every action your agent takes is a git commit. You can see exactly what it did, when, and why. If it screws up, revert it. Want to clone your agent? Fork the repo — code, personality, scheduled jobs, full history, all of it goes with your fork.
 
 **Free compute, built in** — Every GitHub account comes with free cloud computing time. thepopebot uses that to run your agent. One task or a hundred in parallel — the compute is already included.
@@ -122,6 +124,7 @@ The wizard handles everything:
 | [Architecture](docs/ARCHITECTURE.md) | Two-layer design, file structure, API endpoints, GitHub Actions, Docker agent |
 | [Configuration](docs/CONFIGURATION.md) | Environment variables, GitHub secrets, repo variables, ngrok, Telegram setup |
 | [Customization](docs/CUSTOMIZATION.md) | Personality, skills, operating system files, using your bot, security details |
+| [Cost Optimization](docs/COST_OPTIMIZATION.md) | **Save 60-80% on API costs** — Model selection, Ollama integration, spending strategies |
 | [Auto-Merge](docs/AUTO_MERGE.md) | Auto-merge controls, ALLOWED_PATHS configuration |
 | [How to Use Pi](docs/HOW_TO_USE_PI.md) | Guide to the Pi coding agent |
 | [Security](docs/SECURITY_TODO.md) | Security hardening plan |
