@@ -17,7 +17,7 @@ All environment variables for the Event Handler (set in `event_handler/.env`):
 | `GH_WEBHOOK_SECRET` | Secret for GitHub Actions webhook auth | For notifications |
 | `ANTHROPIC_API_KEY` | Claude API key for chat functionality | For chat |
 | `OPENAI_API_KEY` | OpenAI key for voice transcription | For voice |
-| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-sonnet-4) | No |
+| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-haiku-4-20250514 for cost optimization) | No |
 
 ---
 
@@ -43,7 +43,34 @@ Configure in **Settings → Secrets and variables → Actions → Variables**:
 | `AUTO_MERGE` | Set to `false` to disable auto-merge of job PRs | No | Enabled |
 | `ALLOWED_PATHS` | Comma-separated path prefixes for auto-merge | No | `/logs` |
 | `IMAGE_URL` | Docker image path (e.g., `ghcr.io/myorg/mybot`) | No | `stephengpope/thepopebot:latest` |
-| `MODEL` | Anthropic model ID for the Pi agent (e.g., `claude-sonnet-4-5-20250929`) | No | Pi default |
+| `MODEL` | Anthropic model ID for the Pi agent | No | `claude-haiku-4-20250514` (recommended for cost savings) |
+
+### Cost Optimization: Choosing the Right Model
+
+**thepopebot is optimized for cost efficiency by default:**
+
+- **Event Handler Chat** (Telegram): Uses `claude-haiku-4-20250514` by default (fast, cheap, good for conversation)
+- **Docker Agent Jobs**: Set `MODEL` to `claude-haiku-4-20250514` for routine tasks
+- **Heartbeats**: Uses free local Ollama (zero API cost)
+
+**When to use Haiku (`claude-haiku-4-20250514`):**
+- Simple tasks (file operations, git commands, text processing)
+- Scheduled jobs (daily checks, cleanup tasks)
+- Telegram chat conversations
+- Any task that doesn't require deep reasoning
+
+**When to use Sonnet (`claude-sonnet-4-20250514`):**
+- Complex code generation
+- Multi-step problem solving
+- Tasks requiring deep understanding of large codebases
+- Critical operations where quality > cost
+
+**To set the model:**
+1. Go to **Settings → Secrets and variables → Actions → Variables**
+2. Set `MODEL` to `claude-haiku-4-20250514` (cost-optimized) or `claude-sonnet-4-20250514` (maximum capability)
+3. Override per-job by including model instructions in job description
+
+See [COST_OPTIMIZATION.md](COST_OPTIMIZATION.md) for detailed cost analysis and switching strategies.
 
 ---
 
