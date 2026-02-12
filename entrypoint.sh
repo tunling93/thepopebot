@@ -30,9 +30,11 @@ if [ -n "$LLM_SECRETS" ]; then
     eval $(echo "$LLM_SECRETS_JSON" | jq -r 'to_entries | .[] | "export \(.key)=\"\(.value)\""')
 fi
 
-# Git setup - derive identity from GitHub token
-gh auth setup-git
+# Git setup - configure push behavior FIRST, before any auth or operations
 git config --global push.autoSetupRemote true
+
+# Setup GitHub authentication and derive identity from GitHub token
+gh auth setup-git
 GH_USER_JSON=$(gh api user -q '{name: .name, login: .login, email: .email, id: .id}')
 GH_USER_NAME=$(echo "$GH_USER_JSON" | jq -r '.name // .login')
 GH_USER_EMAIL=$(echo "$GH_USER_JSON" | jq -r '.email // "\(.id)+\(.login)@users.noreply.github.com"')
@@ -85,7 +87,7 @@ pi $MODEL_FLAGS -p "$PROMPT" --session-dir "${LOG_DIR}"
 git add -A
 git add -f "${LOG_DIR}"
 git commit -m "thepopebot: job ${JOB_ID}" || true
-git push origin
+git push --set-upstream origin "${BRANCH}"
 
 # 3. Merge (pi has memory of job via session)
 #if [ -n "$REPO_URL" ] && [ -f "/job/MERGE_JOB.md" ]; then
