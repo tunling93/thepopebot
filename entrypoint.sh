@@ -32,6 +32,7 @@ fi
 
 # Git setup - derive identity from GitHub token
 gh auth setup-git
+git config --global push.autoSetupRemote true
 GH_USER_JSON=$(gh api user -q '{name: .name, login: .login, email: .email, id: .id}')
 GH_USER_NAME=$(echo "$GH_USER_JSON" | jq -r '.name // .login')
 GH_USER_EMAIL=$(echo "$GH_USER_JSON" | jq -r '.email // "\(.id)+\(.login)@users.noreply.github.com"')
