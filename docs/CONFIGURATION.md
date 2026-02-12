@@ -17,7 +17,7 @@ All environment variables for the Event Handler (set in `event_handler/.env`):
 | `GH_WEBHOOK_SECRET` | Secret for GitHub Actions webhook auth | For notifications |
 | `ANTHROPIC_API_KEY` | Claude API key for chat functionality | For chat |
 | `OPENAI_API_KEY` | OpenAI key for voice transcription | For voice |
-| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-haiku-4-20250514 for cost optimization) | No |
+| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-haiku-4-5-20251001 with web_search support) | No |
 
 ---
 
@@ -43,17 +43,17 @@ Configure in **Settings → Secrets and variables → Actions → Variables**:
 | `AUTO_MERGE` | Set to `false` to disable auto-merge of job PRs | No | Enabled |
 | `ALLOWED_PATHS` | Comma-separated path prefixes for auto-merge | No | `/logs` |
 | `IMAGE_URL` | Docker image path (e.g., `ghcr.io/myorg/mybot`) | No | `stephengpope/thepopebot:latest` |
-| `MODEL` | Anthropic model ID for the Pi agent | No | `claude-haiku-4-20250514` (recommended for cost savings) |
+| `MODEL` | Anthropic model ID for the Pi agent | No | `claude-haiku-4-5-20251001` (recommended for cost savings with web_search) |
 
 ### Cost Optimization: Choosing the Right Model
 
 **thepopebot is optimized for cost efficiency by default:**
 
-- **Event Handler Chat** (Telegram): Uses `claude-haiku-4-20250514` by default (fast, cheap, good for conversation)
-- **Docker Agent Jobs**: Set `MODEL` to `claude-haiku-4-20250514` for routine tasks
+- **Event Handler Chat** (Telegram): Uses `claude-haiku-4-5-20251001` by default (fast, cheap, supports web_search)
+- **Docker Agent Jobs**: Set `MODEL` to `claude-haiku-4-5-20251001` for routine tasks with web access
 - **Heartbeats**: Uses free local Ollama (zero API cost)
 
-**When to use Haiku (`claude-haiku-4-20250514`):**
+**When to use Haiku (`claude-haiku-4-5-20251001`):**
 - Simple tasks (file operations, git commands, text processing)
 - Scheduled jobs (daily checks, cleanup tasks)
 - Telegram chat conversations
@@ -67,8 +67,13 @@ Configure in **Settings → Secrets and variables → Actions → Variables**:
 
 **To set the model:**
 1. Go to **Settings → Secrets and variables → Actions → Variables**
-2. Set `MODEL` to `claude-haiku-4-20250514` (cost-optimized) or `claude-sonnet-4-20250514` (maximum capability)
+2. Set `MODEL` to `claude-haiku-4-5-20251001` (cost-optimized with web_search) or `claude-sonnet-4-20250514` (maximum capability)
 3. Override per-job by including model instructions in job description
+
+**Note:** If using web_search_20250305 tool, ensure your model is compatible:
+- ✓ `claude-haiku-4-5-20251001` (cheapest with web_search)
+- ✓ `claude-sonnet-4-20250514` 
+- ✗ `claude-haiku-4-20250514` (older Haiku - no web_search support)
 
 See [COST_OPTIMIZATION.md](COST_OPTIMIZATION.md) for detailed cost analysis and switching strategies.
 
