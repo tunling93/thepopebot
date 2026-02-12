@@ -1,0 +1,1 @@
+Undersök event handler-loggarna för att hitta vad som gick fel när användaren fick felmeddelandet 'Sorry, I encountered an error processing your message.' Titta på vilka fel som loggades, när de inträffade, och vad som kan ha orsakat dem. Rapportera dina fynd i detalj.
