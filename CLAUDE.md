@@ -323,7 +323,7 @@ Both `job` and `command` strings support the same templates:
 | `TELEGRAM_WEBHOOK_SECRET` | Secret for webhook validation | No |
 | `GH_WEBHOOK_SECRET` | Secret for GitHub Actions webhook auth | For notifications |
 | `ANTHROPIC_API_KEY` | Claude API key for chat functionality | For chat |
-| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-haiku-4-20250514 for cost optimization) | No |
+| `EVENT_HANDLER_MODEL` | Claude model for chat (default: claude-haiku-4-5-20251001 with web_search support) | No |
 
 ## Docker Agent Layer
 
@@ -432,7 +432,7 @@ Configure these in **Settings → Secrets and variables → Actions → Variable
 | `AUTO_MERGE` | Set to `false` to disable auto-merge of job PRs | Enabled (any value except `false`) |
 | `ALLOWED_PATHS` | Comma-separated path prefixes (e.g., `/logs`). Use `/` for all paths. | `/logs` |
 | `IMAGE_URL` | Full Docker image path (e.g., `ghcr.io/myorg/mybot`). GHCR URLs trigger automatic builds via `docker-build.yml`. Non-GHCR URLs (e.g., `docker.io/user/mybot`) are pulled directly. | Not set (uses `stephengpope/thepopebot:latest`) |
-| `MODEL` | Anthropic model ID for the Pi agent. **Recommended:** `claude-haiku-4-20250514` for cost savings (60-80% reduction). Use `claude-sonnet-4-20250514` for complex tasks only. See [COST_OPTIMIZATION.md](docs/COST_OPTIMIZATION.md) | Not set (Pi default) |
+| `MODEL` | Anthropic model ID for the Pi agent. **Recommended:** `claude-haiku-4-5-20251001` for cost savings with web_search support (60-80% reduction). Use `claude-sonnet-4-20250514` for complex tasks only. See [COST_OPTIMIZATION.md](docs/COST_OPTIMIZATION.md) | Not set (Pi default) |
 
 ## How Credentials Work
 

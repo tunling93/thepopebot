@@ -1,7 +1,7 @@
 const path = require('path');
 const { render_md } = require('../utils/render-md');
 
-const DEFAULT_MODEL = 'claude-haiku-4-20250514'; // Cost-optimized: Haiku for chat, Sonnet for complex tasks
+const DEFAULT_MODEL = 'claude-haiku-4-5-20251001'; // Cost-optimized Haiku with web_search_20250305 support
 
 // Web search tool definition (Anthropic built-in)
 const WEB_SEARCH_TOOL = {

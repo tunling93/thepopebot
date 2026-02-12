@@ -164,7 +164,7 @@ Create a job using Sonnet: [your task description]
 1. Go to **Settings → Secrets and variables → Actions → Variables**
 2. Find or create `MODEL` variable
 3. Change value to:
-   - `claude-haiku-4-20250514` (default, cost-optimized)
+   - `claude-haiku-4-5-20251001` (default, cost-optimized with web_search)
    - `claude-sonnet-4-20250514` (7.5x more expensive, more capable)
 
 **For chat** (Event Handler `.env` file):
