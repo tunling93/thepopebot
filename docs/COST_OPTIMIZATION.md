@@ -91,15 +91,22 @@ The heartbeat cron runs every 30 minutes using Ollama instead of spinning up a f
 
 ### 1. Set Default Model (Recommended: Haiku)
 
-**In GitHub Repository Variables:**
+**✅ Already configured by setup wizard!** Haiku is the default model for both chat and jobs.
+
+**To verify or change in GitHub Repository Variables:**
 
 1. Go to **Settings → Secrets and variables → Actions → Variables**
-2. Click **New repository variable**
-3. Name: `MODEL`
-4. Value: `claude-haiku-4-20250514`
-5. Click **Add variable**
+2. Find the `MODEL` variable (created by setup wizard)
+3. Verify value is: `claude-haiku-4-20250514`
+4. If not set or you want to change it:
+   - Click **New repository variable** (if not exists)
+   - Name: `MODEL`
+   - Value: `claude-haiku-4-20250514`
+   - Click **Add variable**
 
 This sets Haiku as the default for all Docker agent jobs.
+
+**Smart Escalation:** The agent now automatically detects when tasks are too complex for Haiku and will stop to request Sonnet. You don't need to manually switch models — the agent tells you when it needs more intelligence.
 
 ### 2. Event Handler Chat (Already Configured)
 
@@ -136,9 +143,68 @@ The agent will see this instruction and the model switcher logic can be implemen
 
 ---
 
+## Smart Escalation (New Feature)
+
+The agent now includes **automatic complexity detection** built into its personality (`operating_system/SOUL.md`). When running on Haiku, if it encounters a task that requires Sonnet-level intelligence, it will:
+
+1. **Stop execution immediately**
+2. **Explain why** — Reference specific complexity factors (architecture, multi-file, security, etc.)
+3. **Provide cost estimate** — Show expected cost difference (7.5x multiplier)
+4. **Wait for approval** — User decides whether to proceed with Sonnet or try with Haiku anyway
+
+### Tasks that Trigger Escalation
+
+**Complex Code Architecture:**
+- Designing or refactoring system architecture
+- Multi-file refactorings (10+ files)
+- Deep integration between components
+- Performance optimization requiring algorithm analysis
+
+**Critical Operations:**
+- Self-modification of thepopebot's core systems
+- Security-sensitive changes
+- Database schema changes
+- Deployment pipeline modifications
+
+**Advanced Problem Solving:**
+- Debugging complex, multi-layer issues
+- Circular dependencies or race conditions
+- Memory/performance profiling
+- Advanced algorithm implementation
+
+**Large-Scale Changes:**
+- Codebase-wide refactorings
+- Adding major features touching many systems
+- Breaking changes requiring careful migration
+- Documentation rewrites for entire systems
+
+### Example Escalation Message
+
+```
+⚠️ **This task requires Sonnet-level intelligence:**
+
+This involves refactoring 15+ files across multiple components with complex
+interdependencies. Haiku may miss subtle bugs or integration issues.
+
+**Recommendation:** Ask the user to recreate this job with MODEL=claude-sonnet-4-20250514
+
+**Cost Impact:** ~$0.30 for this task (vs. $0.04 with Haiku)
+
+**Workaround:** I can attempt this with Haiku, but quality may not meet expectations.
+```
+
+### Benefits
+
+- **No manual model switching needed** — Agent detects complexity automatically
+- **Cost-conscious by default** — Only escalates when truly needed
+- **User stays in control** — Always asks permission before using expensive model
+- **Educational** — Learn what tasks require more intelligence
+
+---
+
 ## Switching Logic
 
-### Automatic Model Selection (Future Enhancement)
+### Manual Model Selection (Optional)
 
 You can implement automatic model selection based on job complexity:
 
